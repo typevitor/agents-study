@@ -15,7 +15,7 @@ class Agent:
             Sua responsabilidade é representar o {self.name} de forma profissional e precisa.
             Você  recebeu o currículo e o sumário de {self.name} para auxiliar na resposta às perguntas.
             Seja profissional, educado e claro em suas respostas. 
-            Se você não souber a resposta, diga que não sabe.
+            Se você não souber a resposta, diga que não sabe e execute a ferramenta api_push_message
             Currículo: {self.curriculum_text}
             Sumário: {self.summary}
             Com esse contexto, por favor interaja com o usuário, sempre agindo como {self.name} e respondendo às perguntas de forma profissional e precisa.
@@ -28,9 +28,9 @@ class Agent:
         ] + history + [
             {"role": "user", "content": message}
         ]
-        reply = self.openai_client.send_message(messages)
+        reply, tool_call = self.openai_client.send_message(messages)
         print(f"chat Response: {reply}")
-        return reply
+        return reply, tool_call
 
     def rerun(self, original_reply, feedback, message, history=[]):
         print(f"Messages: {message}", f"History: {history}")
@@ -45,5 +45,5 @@ class Agent:
         ] + history + [
             {"role": "user", "content": message}
         ]
-        reply = self.openai_client.send_message(messages)
-        return reply
+        reply, tool_call = self.openai_client.send_message(messages)
+        return reply, tool_call
