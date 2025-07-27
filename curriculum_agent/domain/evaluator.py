@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from openai_provider import OpenAIProvider
+from application.openai_provider import OpenAIProvider
 
 class Evaluation(BaseModel):
     is_acceptable: bool
@@ -39,5 +39,7 @@ class Evaluator:
             "role": "user", 
             "content": self.evaluate_user_prompt(history, message, reply)
         }]
-        response = self.openai_client.beta.chat.completions.parse(model="gpt-4o-mini", messages=messages, response_format=Evaluation)
-        return response.choices[0].message.parsed
+        return self.openai_client.send_message(
+            messages=messages, 
+            response_format=Evaluation
+        )

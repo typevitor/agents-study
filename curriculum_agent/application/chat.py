@@ -1,11 +1,11 @@
-from agent import Agent
-from evaluator import Evaluator
-from openai_provider import OpenAIProvider
+from domain.agent import Agent
+from domain.evaluator import Evaluator
+from application.openai_provider import OpenAIProvider
 
 class Chat:
     
     def __init__(self, name: str, curriculum: str, summary: str):
-        self.openai_client = OpenAIProvider().make()
+        self.openai_client = OpenAIProvider()
         self.agent = Agent(self.openai_client, name, curriculum, summary)
         self.evaluator = Evaluator(self.openai_client, name, curriculum, summary)
 

@@ -1,4 +1,4 @@
-from openai_provider import OpenAIProvider
+from application.openai_provider import OpenAIProvider
 
 class Agent:
     def __init__(self, provider: OpenAIProvider, name: str, curriculum: str, summary: str):
@@ -25,15 +25,12 @@ class Agent:
         print(f"Messages: {message}", f"History: {history}")
         messages = [
             {"role": "system", "content": self.system_prompt()},
-        ] + history + [{"role": "user", "content": message}]
-        response = self.openai_client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=messages,
-            max_tokens=1000,
-            temperature=0.3
-        )
-
-        return response.choices[0].message.content
+        ] + history + [
+            {"role": "user", "content": message}
+        ]
+        reply = self.openai_client.send_message(messages)
+        print(f"chat Response: {reply}")
+        return reply
 
     def rerun(self, original_reply, feedback, message, history=[]):
         print(f"Messages: {message}", f"History: {history}")
@@ -43,6 +40,10 @@ class Agent:
             f"## Your attempted answer:\n{original_reply}\n\n"
             f"## Reason for rejection:\n{feedback}\n"
         )
-        messages = [{"role": "system", "content": updated_prompt}] + history + [{"role": "user", "content": message}]
-        response = self.openai_client.chat.completions.create(model="gpt-4o-mini", messages=messages)
-        return response.choices[0].message.content
+        messages = [
+            {"role": "system", "content": updated_prompt}
+        ] + history + [
+            {"role": "user", "content": message}
+        ]
+        reply = self.openai_client.send_message(messages)
+        return reply
