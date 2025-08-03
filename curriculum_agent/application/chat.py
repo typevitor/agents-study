@@ -14,7 +14,7 @@ class Chat:
             {"type": "function", "function": Api().tool_definition()}
         )
 
-    def chat(self, message, history=[]):
+    async def chat(self, message, history=[]):
         reply, tool_call = self.agent.chat(message, history)
         done = False
         while not done:
