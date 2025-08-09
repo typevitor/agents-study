@@ -1,0 +1,8 @@
+write_python_code:
+  description: >
+    Write Python code to archive this: {assignment}
+  expected_output: >
+    A text file containing the Python code that accomplishes the assignment.
+  agent: coder
+  output_file: output/python_code.py
+  
