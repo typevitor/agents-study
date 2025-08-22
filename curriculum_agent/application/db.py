@@ -20,3 +20,7 @@ class ChromaDB:
         #    shutil.rmtree(self.CHROMA_PATH)
 
         self.client.add_documents(chunks)
+
+    def similarity_search_with_score(self, query: str, k: int = 3):
+        results = self.client.similarity_search_with_score(query, k=k)
+        return [(doc, score) for doc, score in results]

@@ -6,10 +6,9 @@ class Evaluation(BaseModel):
     feedback: str
 
 class Evaluator:
-    def __init__(self, provider: OpenAIProvider, name: str, curriculum: str, summary: str):
+    def __init__(self, provider: OpenAIProvider, name: str, summary: str):
         self.openai_client = provider
         self.name = name
-        self.curriculum_text = curriculum
         self.summary = summary
     
     def system_prompt(self):
@@ -17,10 +16,7 @@ class Evaluator:
             Sua tarefa é avaliar a resposta do modelo com base no contexto fornecido.
             O Agente está agindo como {self.name} e está respondendo perguntas sobre sua carreira, experiência, formação acadêmica, cursos, habilidades e projetos.
             O Agente foi instruído a ser profissional, educado e claro em suas respostas, como se estivesse conversando com futuros empregadores.
-            O contexto é o currículo e o sumário de {self.name}.
             O Agente recebeu o currículo e o sumário de {self.name} para auxiliar na resposta às perguntas.
-            Currículo: {self.curriculum_text}
-            Sumário: {self.summary}
         """
     
     def evaluate_user_prompt(self, history, message, reply):

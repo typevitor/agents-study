@@ -1,15 +1,15 @@
 import json
-from agents.agent import Agent
-from agents.evaluator import Evaluator
+from base_agents.agent import Agent
+from base_agents.evaluator import Evaluator
 from application.openai_provider import OpenAIProvider
 from application.api import Api
 
 class Chat:
     
-    def __init__(self, name: str, curriculum: str, summary: str):
+    def __init__(self, name: str, summary: str):
         self.openai_client = OpenAIProvider()
-        self.agent = Agent(self.openai_client, name, curriculum, summary)
-        self.evaluator = Evaluator(self.openai_client, name, curriculum, summary)
+        self.agent = Agent(self.openai_client, name, summary)
+        self.evaluator = Evaluator(self.openai_client, name, summary)
         self.openai_client.add_tool(
             {"type": "function", "function": Api().tool_definition()}
         )
