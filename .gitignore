@@ -1,2 +1,4 @@
 .env
 __pycache__/
+curriculum_agent/data/*
+curriculum_agent/db/*
