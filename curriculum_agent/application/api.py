@@ -1,4 +1,3 @@
-
 class Api:
     def __init__(self):
         self.name = "api_push_message"

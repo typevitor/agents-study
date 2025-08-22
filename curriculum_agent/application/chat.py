@@ -1,6 +1,6 @@
 import json
-from domain.agent import Agent
-from domain.evaluator import Evaluator
+from agents.agent import Agent
+from agents.evaluator import Evaluator
 from application.openai_provider import OpenAIProvider
 from application.api import Api
 
