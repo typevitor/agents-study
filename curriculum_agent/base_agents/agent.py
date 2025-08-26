@@ -11,7 +11,9 @@ class Agent:
 
     def system_prompt(self, original_message):
         results = self.db.similarity_search_with_score(original_message, k=3)
-        print(f"Resultado do RAG: {results}")
+        results = [(doc, score) for doc, score in results]
+        for message, score in results:
+            print(f"Resultado do RAG: messsage: {message}, score: {score}")
         prompt = f"""
             Você está agindo como {self.name}, Você está respondendo perguntas no site do {self.name}.
             Particulamente respostas sobre a carrência, experiência, formação academica, cursos, habilidades e projetos.
@@ -26,7 +28,6 @@ class Agent:
         return prompt
 
     def chat(self, message, history=[]):
-        print(f"Messages: {message}", f"History: {history}")
         messages = [
             {"role": "system", "content": self.system_prompt(message)},
         ] + history + [

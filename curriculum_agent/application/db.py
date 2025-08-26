@@ -10,7 +10,7 @@ class ChromaDB:
 
     def __init__(self):
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-        self.client = Chroma('curriculum', self.embeddings, persist_directory=self.CHROMA_PATH)
+        self.client =  Chroma('curriculum', self.embeddings, persist_directory=self.CHROMA_PATH)
 
     def save(self, chunks: Document):
         """
