@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"wheater-mcp": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"${workspaceFolder}/simple-mcp-server/server.py"
+			]
+		}
+	},
+	"inputs": []
+}
