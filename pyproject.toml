@@ -8,6 +8,7 @@ dependencies = [
     "asyncio>=3.4.3",
     "crewai>=0.152.0",
     "dotenv>=0.9.9",
+    "fastmcp>=2.12.2",
     "gradio>=5.38.2",
     "langchain>=0.3.27",
     "langchain-chroma>=0.2.5",
